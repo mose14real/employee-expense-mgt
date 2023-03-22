@@ -82,10 +82,10 @@
 
         {{-- 2nd-Column-Layout --}}
         <div class="col-md-6 border border-1 mx-auto"
-            style="height:100vh; overflow-y:scroll !important;position:relative">
+            style="height:100vh; overflow-y:scroll !important; position:relative">
 
             {{-- Table --}}
-            <table class="table">
+            <table class="table compact" id="expenseTable" style="width:100%">
                 <thead>
                     <tr>
                         <th scope="col">Date</th>
@@ -134,72 +134,89 @@
 
     </div>
 
+    {{-- Modal --}}
+    <div class="modal fade" id="add-expense" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row mx-auto">
 
+                        {{-- form --}}
+                        <div class="col-md-6">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-6" id="exampleModalLabel">Add Expense</h1>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label">Merchant</label>
+                                <select class="form-select form-select-sm" aria-label="form-select-sm example">
+                                    <option selected=""></option>
+                                    <option value="Fast food">Fast food</option>
+                                    <option value="Breakfast">Breakfast</option>
+                                    <option value="Taxi">Taxi</option>
+                                    <option value="Airline">Airline</option>
+                                    <option value="Hotel">Hotel</option>
+                                    <option value="Electronics">Electronics</option>
+                                    <option value="Parking">Parking</option>
+                                    <option value="Ride sharing">Ride sharing</option>
+                                    <option value="Shuttle">Shuttle</option>
+                                    <option value="Rental car">Rental car</option>
+                                    <option value="Restaurant">Restaurant</option>
+                                    <option value="Office supplies">Office supplies</option>
+                                </select>
+                            </div>
 
-</x-app-layout>
+                            <label class="form-label">Total</label>
+                            <div class="col-md-12 input-group mb-3">
+                                <span class="input-group-text">$</span>
+                                <input type="number" class="form-control" name="total">
+                            </div>
 
-{{-- Modal --}}
-<div class="modal fade" id="add-expense" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="row mx-auto">
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label">Date</label>
+                                <input type="date" class="form-control" name="date">
+                            </div>
 
-                    {{-- form --}}
-                    <div class="col-md-6">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-6" id="exampleModalLabel">Add Expense</h1>
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label">Comment</label>
+                                <textarea class="form-control mb-3" name="comment"></textarea>
+                            </div>
+
+                            <div class="col-md-12 mb-3">
+                                <button class="btn btn-primary" type="button">Save</button>
+                                <button class="btn btn-primary" type="button">Cancel</button>
+                            </div>
                         </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Merchant</label>
-                            <select class="form-select form-select-sm" aria-label="form-select-sm example">
-                                <option selected=""></option>
-                                <option value="Fast food">Fast food</option>
-                                <option value="Breakfast">Breakfast</option>
-                                <option value="Taxi">Taxi</option>
-                                <option value="Airline">Airline</option>
-                                <option value="Hotel">Hotel</option>
-                                <option value="Electronics">Electronics</option>
-                                <option value="Parking">Parking</option>
-                                <option value="Ride sharing">Ride sharing</option>
-                                <option value="Shuttle">Shuttle</option>
-                                <option value="Rental car">Rental car</option>
-                                <option value="Restaurant">Restaurant</option>
-                                <option value="Office supplies">Office supplies</option>
-                            </select>
+
+                        {{-- Receipt --}}
+                        <div class="col-md-6 border border-1">
+                            <div class="input-group mb-3 mt-3">
+                                <input type="file" class="form-control">
+                            </div>
                         </div>
 
-                        <label class="form-label">Total</label>
-                        <div class="col-md-12 input-group mb-3">
-                            <span class="input-group-text">$</span>
-                            <input type="number" class="form-control" name="total">
-                        </div>
-
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Date</label>
-                            <input type="date" class="form-control" name="date">
-                        </div>
-
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Comment</label>
-                            <textarea class="form-control mb-3" name="comment"></textarea>
-                        </div>
-
-                        <div class="col-md-12 mb-3">
-                            <button class="btn btn-primary" type="button">Save</button>
-                            <button class="btn btn-primary" type="button">Cancel</button>
-                        </div>
                     </div>
-
-                    {{-- Receipt --}}
-                    <div class="col-md-6 border border-1">
-                        <div class="input-group mb-3 mt-3">
-                            <input type="file" class="form-control">
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+
+    <script>
+        DataTable.datetime('MM DD YYYY');
+        $(document).ready(function() {
+            $('#expenseTable').DataTable({
+                order: [
+                    [0, 1, 2, 3, 4, 'desc', 'asc']
+                ],
+                info: false,
+                paging: false,
+                searching: false
+            });
+        });
+    </script>
+
+</x-app-layout>

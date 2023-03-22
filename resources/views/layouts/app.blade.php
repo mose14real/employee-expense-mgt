@@ -16,6 +16,15 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css"
         integrity="sha512-YFENbnqHbCRmJt5d+9lHimyEMt8LKSNTMLSaHjvsclnZGICeY/0KYEeiHwD1Ux4Tcao0h60tdcMv+0GljvWyHg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    {{-- DataTable --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+
+    <link href="https://cdn.datatables.net/v/bs5/dt-1.13.4/date-1.4.0/sc-2.1.1/sb-1.4.2/sp-2.1.2/datatables.min.css"
+        rel="stylesheet" />
 </head>
 
 <body style="overflow:hidden">
